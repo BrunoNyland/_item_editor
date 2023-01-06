@@ -527,7 +527,7 @@ class ImuneFlag(dict):
 
     def __init__(self):
         super().__init__()
-        self.update([
+        self.update({
             "PARA" : (1 << 0),
             "CURSE" : (1 << 1),
             "STUN" : (1 << 2),
@@ -535,7 +535,7 @@ class ImuneFlag(dict):
             "SLOW" : (1 << 4),
             "POISON" : (1 << 5),
             "TERROR" : (1 << 6),
-        ])
+        })
 
 class ApplyType(list):
     def __init__(self):
@@ -674,8 +674,3 @@ class Item():
     Specular = 0
     GainSocketPercent = 0
     AddonType = 0
-
-    def __init__(self, Vnum:int, Name:str, Type:int) -> None:
-        pass
-i = 251
-print(Types())

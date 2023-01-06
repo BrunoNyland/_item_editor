@@ -8006,7 +8006,7 @@
 50179	ETC	icon/item/50179.tga	d:/ymir work/item/etc/easter_egg1.GR2
 50180	ETC	icon/item/50180.tga	d:/ymir work/item/etc/basket1.GR2
 50182	ETC	icon/item/50182.tga	
-50186	ETC	icon/item/boss_box.tga	d:/ymir work/item/etc/boss_box.gr2
+50186	ETC	icon/item/boss_box.tga  d:/ymir work/item/etc/boss_box.gr2
 50187	ETC	icon/item/50187.tga	
 50188	ETC	icon/item/50187.tga	
 50189	ETC	icon/item/50187.tga	
