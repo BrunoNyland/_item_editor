@@ -641,7 +641,7 @@ class ApplyType(list):
             "APPLY_RESIST_HUMAN",
         ])
     
-class Item():
+class Item(dict):
 
     Vnum = 0
     Name = ''
@@ -674,3 +674,48 @@ class Item():
     Specular = 0
     GainSocketPercent = 0
     AddonType = 0
+
+    desc = ''
+
+    icon = ''
+    icon_list_types = ''
+
+    model = ''
+
+class ItemProto(list):
+    def append(self, __object:Item) -> None:
+        if type(__object) != Item:
+            return False
+        return super().append(__object)
+
+    def add_item(self, item:Item) -> None:
+        self.append(item)
+
+    def remove_item(self, item:Item) -> bool:
+        if not item in self:
+            return False
+        self.remove(item)
+        return True
+
+    def find_item(self, id:int) -> Item:
+        for item in self:
+            if item.Vnum == id:
+                return item
+        return None
+
+    def find_itens_by_name(self, s:str) -> list:
+        ret = []
+        for item in self:
+            if s in item.Name:
+                ret.append(item)
+        return ret
+
+    def find_itens_by_name(self, name:str) -> list:
+        ret = []
+        for item in self:
+            if name in item.Name:
+                ret.append(item)
+        return ret
+
+    def filter_itens(self, name:str=...):
+        return
