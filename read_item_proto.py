@@ -1,5 +1,6 @@
+import time
 import os
-from _item import ItemProto, Item
+import item_define as item
 
 locale_path = '.'
 
@@ -13,14 +14,21 @@ f = open(item_proto_path, 'r')
 item_proto_lines = f.readlines()
 f.close()
 
-item_proto = ItemProto()
+item_proto = item.ItemProto()
 
 for lin in item_proto_lines:
+    time.sleep(1)
     collums = lin.split('\t')
-    item = Item()
-    item.Vnum = collums[0]
-    item_proto.append(item)
 
-for item in item_proto:
-    print(item.Vnum)
+    if not collums[0].isnumeric():
+        continue
+
+    if len(collums) != 32:
+        continue
+
+    i = item.Item()
+    i.read(collums)
+    item_proto.append(i)
+
+    print(i.Vnum, i.Name, i.Type, i.SubType)
         

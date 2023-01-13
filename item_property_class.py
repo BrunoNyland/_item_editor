@@ -1,27 +1,4 @@
-
-
-ITEM_SOCKET_REMAIN_SEC = 0
-
-ITEM_NAME_MAX_LEN = 50
-ITEM_NAME_MAX_LEN = 24
-ITEM_VALUES_MAX_NUM = 6
-ITEM_LIMIT_MAX_NUM = 2
-ITEM_APPLY_MAX_NUM = 3
-ITEM_SOCKET_MAX_NUM = 6
-ITEM_ATTRIBUTE_MAX_NUM = 7
-ITEM_ATTRIBUTE_MAX_LEVEL = 5
-REFINE_MATERIAL_MAX_NUM = 5
-ITEM_ELK_VNUM = 50026
-
-
-ITEM_VALUE_CHARGING_AMOUNT_IDX = 0
-ITEM_SOCKET_CHARGING_AMOUNT_IDX = 2
-
-
-ITEM_SOCKET_UNIQUE_SAVE_TIME = ITEM_SOCKET_MAX_NUM - 2
-ITEM_SOCKET_UNIQUE_REMAIN_TIME = ITEM_SOCKET_MAX_NUM - 1
-
-class Types(list):
+class Type(list):
     ITEM_NONE = 0
     ITEM_WEAPON = 1
     ITEM_ARMOR = 2
@@ -86,17 +63,17 @@ class Types(list):
             "ITEM_BELT",
         ])
 
-class SubType(list):
+class SubType(dict):
     class ITEM_METIN(list):
         METIN_NORMAL = 0
         METIN_GOLD = 1
 
-    def __init__(self):
-        super().__init__()
-        self.extend([
-            "METIN_NORMAL",
-            "METIN_GOLD",
-        ])
+        def __init__(self):
+            super().__init__()
+            self.extend([
+                "METIN_NORMAL",
+                "METIN_GOLD",
+            ])
 
     class ITEM_WEAPON(list):
         WEAPON_SWORD = 0
@@ -354,6 +331,23 @@ class SubType(list):
                 "LOTTERY_INSTANT",
             ])
 
+    def __init__(self):
+        super().__init__()
+        self.update({
+            "ITEM_WEAPON":self.ITEM_WEAPON(),
+            "ITEM_ARMOR":self.ITEM_ARMOR(),
+            "ITEM_USE":self.ITEM_USE(),
+            "ITEM_AUTOUSE":self.ITEM_AUTOUSE(),
+            "ITEM_MATERIAL":self.ITEM_MATERIAL(),
+            "ITEM_SPECIAL":self.ITEM_SPECIAL(),
+            "ITEM_TOOL":self.ITEM_TOOL(),
+            "ITEM_LOTTERY":self.ITEM_LOTTERY(),
+            "ITEM_METIN":self.ITEM_METIN(),
+            "ITEM_FISH":self.ITEM_FISH(),
+            "ITEM_RESOURCE":self.ITEM_RESOURCE(),
+            "ITEM_UNIQUE":self.ITEM_UNIQUE(),
+            "ITEM_COSTUME":self.ITEM_COSTUME(),
+        })  
 
 class Flag(dict):
     ITEM_FLAG_REFINEABLE = (1 << 0)
@@ -642,7 +636,6 @@ class ApplyType(list):
         ])
     
 class Item(dict):
-
     Vnum = 0
     Name = ''
     Type = 0
@@ -681,6 +674,49 @@ class Item(dict):
     icon_list_types = ''
 
     model = ''
+
+    def read(self, collun:list) -> bool:
+        if len(collun) != 32:
+            raise IndexError('len(collun) = %d' % len(collun))
+
+        self.Vnum = collun[0]
+        self.Name = collun[1]
+        self.Type = collun[2]
+        self.SubType = collun[3]
+        self.Size = 1
+        self.AntiFlags = 0
+        self.Flags = 0
+        self.WearFlags = 0
+        self.Gold = 0
+        self.ShopBuyPrice = 0
+        self.RefinedVnum = 0
+        self.RefineSet = 0
+        self.LimitType0 = 0
+        self.LimitValue0 = 0
+        self.LimitType1 = 0
+        self.LimitValue1 = 0
+        self.ApplyType0 = 0
+        self.ApplyValue0 = 0
+        self.ApplyType1 = 0
+        self.ApplyValue1 = 0
+        self.ApplyType2 = 0
+        self.ApplyValue2 = 0
+        self.Value0 = 0
+        self.Value1 = 0
+        self.Value2 = 0
+        self.Value3 = 0
+        self.Value4 = 0
+        self.Value5 = 0
+        self.Specular = 0
+        self.GainSocketPercent = 0
+        self.AddonType = 0
+
+        self.desc = ''
+
+        self.icon = ''
+        self.icon_list_types = ''
+
+        self.model = ''
 
 class ItemProto(list):
     def append(self, __object:Item) -> None:
