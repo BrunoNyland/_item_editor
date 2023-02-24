@@ -21,3 +21,4 @@ ITEM_SOCKET_UNIQUE_REMAIN_TIME = ITEM_SOCKET_MAX_NUM - 1
 
 TYPE = item_proto_classes.Type()
 SUBTYPE = item_proto_classes.SubType()
+
